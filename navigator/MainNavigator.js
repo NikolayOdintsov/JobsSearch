@@ -10,24 +10,41 @@ import SettingsScreen from '../screens/SettingsScreen';
  * Navigator setup
  */
 
+const bottomTabNavigationOptions = {
+    tabBarVisible: false
+};
+
 const ReviewFlowNavigator = createStackNavigator({
     review: { screen: ReviewScreen },
     settings: { screen: SettingsScreen }
 });
 
 const MainFlowNavigator = createBottomTabNavigator({
-    map: { screen: MapScreen },
-    deck: { screen: DeckScreen },
+    map: {
+        screen: MapScreen,
+        navigationOptions: bottomTabNavigationOptions
+    },
+    deck: {
+        screen: DeckScreen,
+        navigationOptions: bottomTabNavigationOptions
+    },
     review: {
         screen: ReviewFlowNavigator
     }
 });
 
 const MainNavigator = createBottomTabNavigator({
-    welcome: { screen: WelcomeScreen },
-    auth: { screen: AuthScreen },
+    welcome: {
+        screen: WelcomeScreen,
+        navigationOptions: bottomTabNavigationOptions
+    },
+    auth: {
+        screen: AuthScreen,
+        navigationOptions: bottomTabNavigationOptions
+    },
     main: {
-        screen: MainFlowNavigator
+        screen: MainFlowNavigator,
+        navigationOptions: bottomTabNavigationOptions
     }
 });
 
