@@ -1,15 +1,15 @@
-import {FETCH_JOBS} from '../actions/types';
+import { FETCH_JOBS } from '../actions/types';
 
-const INITIAL_STATE ={
+const INITIAL_STATE = {
     results: []
 };
 
 export default function (state = INITIAL_STATE, action) {
-    switch(action.type) {
+    switch (action.type) {
         case FETCH_JOBS:
-            action.payload;
+            return action.payload;
 
         default:
-            state;
+            return state;
     }
 };

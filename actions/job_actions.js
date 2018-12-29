@@ -3,6 +3,7 @@ import reverseGeocode from 'latlng-to-zip';
 import qs from 'qs';
 
 import { FETCH_JOBS } from './types';
+import * as jsonResponse from './mockIndeedResponse.json';
 
 
 const JOB_ROOT_URL = 'http://api.indeed.com/ads/apisearch?';
@@ -26,10 +27,17 @@ export const fetchJobs = (region, callback) => async (dispatch) => {
         /**
          * NOTE:  reverseGeocode requires Google API key
          */
-            //await reverseGeocode(region);
+        //await reverseGeocode(region);
 
-        const url = buildJobsUrl(zip);
-        let { data } = await axios.get(url);
+        /**
+         * Indeed.com requires publisherId;
+         * @type {string}
+         */
+        // const url = buildJobsUrl(zip);
+        // let { data } = await axios.get(url);
+
+        let data = jsonResponse;
+
         dispatch({
             type: FETCH_JOBS,
             payload: data
