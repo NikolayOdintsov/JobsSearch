@@ -26,7 +26,7 @@ const MainFlowNavigator = createBottomTabNavigator({
     },
     deck: {
         screen: DeckScreen,
-        navigationOptions: bottomTabNavigationOptions
+        // navigationOptions: bottomTabNavigationOptions
     },
     review: {
         screen: ReviewFlowNavigator

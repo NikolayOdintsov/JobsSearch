@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { MapView } from 'expo';
 import { Card, Button } from 'react-native-elements';
 import Swipe from '../components/Swipe';
-
+import * as actions from '../actions';
 
 class DeckScreen extends Component {
 
@@ -39,20 +39,31 @@ class DeckScreen extends Component {
         );
     }
 
-    renderNoMoreCards() {
+    /**
+     * NOTE: error function is vital here because of 'this.props.navigation'. See props context.
+     */
+    renderNoMoreCards = () => {
         return (
-            <Card title="No more jobs"></Card>
+            <Card title="No more jobs">
+                <Button
+                    title="Back to Map"
+                    large
+                    icon={{ name: 'my-location' }}
+                    backgroundColor="#03A9F4"
+                    onPress={() => this.props.navigation.navigate('map')}/>
+            </Card>
         );
     }
 
     render() {
         return (
-            <View style={{marginTop: 10}}>
+            <View style={{ marginTop: 10 }}>
                 <Swipe
                     data={this.props.jobs}
                     keyProp="jobkey"
                     renderCard={this.renderCard}
                     renderNoMoreCards={this.renderNoMoreCards}
+                    onSwipeRight={job => this.props.likeJob(job)}
                 />
             </View>
         );
@@ -71,4 +82,4 @@ const mapStateToProps = ({ jobs }) => {
     return { jobs: jobs.results }
 };
 
-export default connect(mapStateToProps)(DeckScreen);
+export default connect(mapStateToProps, actions)(DeckScreen);

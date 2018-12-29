@@ -2,7 +2,7 @@ import axios from 'axios';
 import reverseGeocode from 'latlng-to-zip';
 import qs from 'qs';
 
-import { FETCH_JOBS } from './types';
+import { FETCH_JOBS, LIKE_JOB, CLEAR_LIKE_JOBS } from './types';
 import * as jsonResponse from './mockIndeedResponse.json';
 
 
@@ -33,8 +33,8 @@ export const fetchJobs = (region, callback) => async (dispatch) => {
          * Indeed.com requires publisherId;
          * @type {string}
          */
-        // const url = buildJobsUrl(zip);
-        // let { data } = await axios.get(url);
+            // const url = buildJobsUrl(zip);
+            // let { data } = await axios.get(url);
 
         let data = jsonResponse;
 
@@ -46,5 +46,19 @@ export const fetchJobs = (region, callback) => async (dispatch) => {
         callback();
     } catch (e) {
         console.error(e);
+    }
+};
+
+export const likeJob = (job) => {
+    return {
+        type: LIKE_JOB,
+        payload: job
+    }
+};
+
+
+export const clearLikedJobs = () => {
+    return {
+        type: CLEAR_LIKE_JOBS
     }
 };
