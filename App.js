@@ -1,18 +1,21 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
-import store from './store';
+import { store, persistor } from './store';
 import MainNavigator from './navigator/MainNavigator';
 
 class App extends React.Component {
-    render() {
 
+    render() {
         return (
             <Provider store={store}>
-                <View style={styles.container}>
-                    <MainNavigator/>
-                </View>
+                <PersistGate loading={null} persistor={persistor}>
+                    <View style={styles.container}>
+                        <MainNavigator/>
+                    </View>
+                </PersistGate>
             </Provider>
         );
     }
